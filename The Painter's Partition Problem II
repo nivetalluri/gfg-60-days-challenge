@@ -1,0 +1,25 @@
+class Solution:
+    def minTime (self, arr, k):
+        # code here
+        def is_possible(limit):
+            painters, current_load = 1, 0
+            for board in arr:
+                if current_load + board <= limit:
+                    current_load += board
+                else:
+                    painters += 1
+                    current_load = board
+            return painters <= k
+        low, high = max(arr), sum(arr)
+        ans = high
+        while low <= high:
+            mid = (low + high) // 2
+            if is_possible(mid):
+                ans = mid
+                high = mid - 1 
+            else:
+                low = mid + 1 
+                
+        return ans
+        
+        
