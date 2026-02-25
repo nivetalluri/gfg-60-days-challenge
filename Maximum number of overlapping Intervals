@@ -1,0 +1,19 @@
+class Solution:
+    def overlapInt(self, arr):
+        # code here
+        events = []
+        
+        for start, end in arr:
+            events.append((start, 1))
+            events.append((end, -1))
+        events.sort(key=lambda x: (x[0], -x[1]))
+        
+        max_overlaps = 0
+        current_overlaps = 0
+        
+        for _, event_type in events:
+            current_overlaps += event_type
+            if current_overlaps > max_overlaps:
+                max_overlaps = current_overlaps
+                
+        return max_overlaps
